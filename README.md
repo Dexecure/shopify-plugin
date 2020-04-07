@@ -81,5 +81,14 @@ At this point, you’re ready to change your existing theme’s assets to use De
 {% endcapture %}
 {{modified_dexecure_url | strip | img_tag}}
 ```
+#### For bgset:
+Find the `snippets/bgset.liquid` file and make changes in this file. Alternatively, make a copy of this snippet and call it instead.
+```
+{%- if image.width > 360 -%}{{ image | img_url: '360x' }} 360w {{ 360 | divided_by: image.aspect_ratio | round }}h,{%-endif -%}
+```
+to:
+```
+{%- if image.width > 360 -%}{% assign dex_img_url = image | img_url: '360x' %}{% include 'dexecure' src:dex_img_url %} 360w {{ 360 | divided_by: image.aspect_ratio | round }}h,{%-endif -%}
+```
 #### Note:
 It’s a good idea to always use the master variant of Shopify’s images, and let Dexecure handle the resizing. That way, you’ll always get the best quality image possible.
